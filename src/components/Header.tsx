@@ -1,34 +1,68 @@
-import { Settings } from 'lucide-react';
-import { agents } from '@/data/mockData';
+import { motion } from 'framer-motion';
+import { ShieldAlert, Wifi, RefreshCw, Activity } from 'lucide-react';
+import StatePanel from '@/components/StatePanel';
+import { useDashboardData } from '@/hooks/useDashboardData';
 
 const Header = () => {
-  const activeAgent = agents[0];
+  const { data, isLoading, error } = useDashboardData();
+
+  if (isLoading) {
+    return <StatePanel title="OpenClaw Command Deck" message="Connecting to local runtime bridge…" />;
+  }
+
+  if (error || !data) {
+    return <StatePanel title="OpenClaw Command Deck" message="Live bridge unavailable" detail={error instanceof Error ? error.message : 'Unknown error'} />;
+  }
+
+  const activeAgents = data.agents.filter((agent) => agent.status === 'active').length;
+  const criticalCount = data.securityIssues.filter((issue) => issue.severity === 'critical').length;
 
   return (
-    <header className="glass-card border-l-2 border-l-primary px-6 py-4 flex items-center justify-between glow-emerald">
-      <div className="flex items-center gap-3">
-        <span className="text-3xl">🐾</span>
+    <motion.div initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }} className="glass-card p-5">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <h1 className="text-xl font-bold font-heading text-foreground">ClawBuddy</h1>
-          <p className="text-sm text-muted-foreground">AI Agent Command Center</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">OpenClaw Runtime</p>
+          <h1 className="text-2xl lg:text-3xl font-bold font-heading text-foreground">Live Command Deck</h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            v{data.summary.version} · Source: {data.meta.source} · Updated {new Date(data.meta.generatedAt).toLocaleTimeString()}
+          </p>
         </div>
-      </div>
-      <div className="flex items-center gap-4">
-        <div className="hidden sm:flex items-center gap-3">
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-pulse-dot absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary" />
-          </span>
-          <div className="text-right">
-            <p className="text-sm font-medium text-foreground">{activeAgent.emoji} {activeAgent.name}: Online</p>
-            <p className="text-xs text-muted-foreground">Last seen: {activeAgent.lastSeen}</p>
+
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="px-3 py-2 rounded-lg bg-secondary/30 min-w-[150px]">
+            <div className="flex items-center gap-2 text-xs text-muted-foreground uppercase tracking-wider mb-1">
+              <Wifi size={12} />
+              Agents Online
+            </div>
+            <p className="text-lg font-semibold text-foreground">{activeAgents}/{data.agents.length}</p>
+          </div>
+
+          <div className="px-3 py-2 rounded-lg bg-secondary/30 min-w-[150px]">
+            <div className="flex items-center gap-2 text-xs text-muted-foreground uppercase tracking-wider mb-1">
+              <ShieldAlert size={12} />
+              Security
+            </div>
+            <p className="text-lg font-semibold text-foreground">{criticalCount} critical</p>
+          </div>
+
+          <div className="px-3 py-2 rounded-lg bg-secondary/30 min-w-[150px]">
+            <div className="flex items-center gap-2 text-xs text-muted-foreground uppercase tracking-wider mb-1">
+              <RefreshCw size={12} />
+              Update
+            </div>
+            <p className="text-sm font-semibold text-foreground line-clamp-2">{data.summary.update}</p>
+          </div>
+
+          <div className="px-3 py-2 rounded-lg bg-secondary/30 min-w-[150px]">
+            <div className="flex items-center gap-2 text-xs text-muted-foreground uppercase tracking-wider mb-1">
+              <Activity size={12} />
+              Heartbeat
+            </div>
+            <p className="text-sm font-semibold text-foreground line-clamp-2">{data.summary.heartbeat}</p>
           </div>
         </div>
-        <button className="p-2 rounded-lg hover:bg-secondary transition-colors text-muted-foreground hover:text-foreground">
-          <Settings size={18} />
-        </button>
       </div>
-    </header>
+    </motion.div>
   );
 };
 

@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { initialTasks, Task, TaskColumn, TaskPriority } from '@/data/mockData';
+import StatePanel from '@/components/StatePanel';
+import { useDashboardData } from '@/hooks/useDashboardData';
+import type { Task, TaskColumn, TaskPriority } from '@/lib/liveData';
 
 const columns: { id: TaskColumn; label: string }[] = [
   { id: 'todo', label: 'To Do' },
@@ -19,16 +21,28 @@ const priorityDot: Record<TaskPriority, string> = {
 };
 
 const TaskBoard = () => {
-  const [tasks, setTasks] = useState<Task[]>(initialTasks);
+  const { data, isLoading, error } = useDashboardData();
   const [draggedTask, setDraggedTask] = useState<string | null>(null);
+  const [overrides, setOverrides] = useState<Record<string, TaskColumn>>({});
+
+  if (isLoading) {
+    return <StatePanel title="Task Board" message="Building live operator task board…" detail="Derived from status, security findings, explicit warnings, and current sessions." />;
+  }
+
+  if (error || !data) {
+    return <StatePanel title="Task Board" message="Could not build live task board" detail={error instanceof Error ? error.message : 'Unknown error'} />;
+  }
+
+  const tasks: Task[] = data.initialTasks.map((task) => ({
+    ...task,
+    column: overrides[task.id] ?? task.column,
+  }));
 
   const handleDragStart = (taskId: string) => setDraggedTask(taskId);
 
   const handleDrop = (column: TaskColumn) => {
     if (!draggedTask) return;
-    setTasks((prev) =>
-      prev.map((t) => (t.id === draggedTask ? { ...t, column, progress: column === 'doing' ? (t.progress || 10) : t.progress } : t))
-    );
+    setOverrides((prev) => ({ ...prev, [draggedTask]: column }));
     setDraggedTask(null);
   };
 
@@ -74,10 +88,7 @@ const TaskBoard = () => {
                       {task.progress !== undefined && (
                         <div className="flex-1 ml-2">
                           <div className="h-1 rounded-full bg-secondary overflow-hidden">
-                            <div
-                              className="h-full rounded-full bg-primary transition-all"
-                              style={{ width: `${task.progress}%` }}
-                            />
+                            <div className="h-full rounded-full bg-primary transition-all" style={{ width: `${task.progress}%` }} />
                           </div>
                         </div>
                       )}
