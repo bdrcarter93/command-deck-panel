@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { LayoutDashboard, Users, Columns3, ScrollText, MessageSquare, Video } from 'lucide-react';
+import { LayoutDashboard, Users, Columns3, ScrollText, MessageSquare, Video, Cpu, Shield } from 'lucide-react';
 import Header from '@/components/Header';
 import CommandDeck from '@/components/CommandDeck';
 import AgentProfiles from '@/components/AgentProfiles';
@@ -8,11 +8,15 @@ import TaskBoard from '@/components/TaskBoard';
 import AILog from '@/components/AILog';
 import Council from '@/components/Council';
 import MeetingIntelligence from '@/components/MeetingIntelligence';
+import SessionDetails from '@/components/SessionDetails';
+import SystemStatus from '@/components/SystemStatus';
 
 const tabs = [
   { id: 'deck', label: 'Command Deck', icon: LayoutDashboard },
   { id: 'agents', label: 'Agents', icon: Users },
   { id: 'tasks', label: 'Task Board', icon: Columns3 },
+  { id: 'sessions', label: 'Sessions', icon: Cpu },
+  { id: 'system', label: 'System', icon: Shield },
   { id: 'log', label: 'AI Log', icon: ScrollText },
   { id: 'council', label: 'Council', icon: MessageSquare },
   { id: 'meetings', label: 'Meetings', icon: Video },
@@ -22,6 +26,8 @@ const tabContent: Record<string, React.ReactNode> = {
   deck: <CommandDeck />,
   agents: <AgentProfiles />,
   tasks: <TaskBoard />,
+  sessions: <SessionDetails />,
+  system: <SystemStatus />,
   log: <AILog />,
   council: <Council />,
   meetings: <MeetingIntelligence />,
@@ -35,7 +41,6 @@ const Index = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 space-y-4">
         <Header />
 
-        {/* Tab Navigation */}
         <div className="glass-card p-1.5 flex gap-1 overflow-x-auto">
           {tabs.map((tab, i) => (
             <motion.button
@@ -56,7 +61,6 @@ const Index = () => {
           ))}
         </div>
 
-        {/* Tab Content */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
