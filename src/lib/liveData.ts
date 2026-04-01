@@ -257,12 +257,27 @@ interface OpenClawPresenceResponseItem {
 const FALLBACK_EMOJIS = ['🐾', '🤖', '🛠️', '🧠', '📡', '🧪'];
 const FALLBACK_COLORS = ['#10b981', '#60a5fa', '#f59e0b', '#a78bfa', '#06b6d4', '#f43f5e'];
 
-async function fetchJson<T>(url: string): Promise<T> {
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error(`Request failed: ${response.status} ${response.statusText}`);
+async function fetchJson<T>(url: string, timeoutMs = 5000): Promise<T> {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    const response = await fetch(url, { signal: controller.signal });
+    if (!response.ok) {
+      throw new Error(`Request failed: ${response.status} ${response.statusText}`);
+    }
+    return (await response.json()) as T;
+  } finally {
+    clearTimeout(timeout);
   }
-  return response.json() as Promise<T>;
+}
+
+async function fetchJsonOr<T>(url: string, fallback: T, timeoutMs = 5000): Promise<T> {
+  try {
+    return await fetchJson<T>(url, timeoutMs);
+  } catch {
+    return fallback;
+  }
 }
 
 function relTime(value?: string | number | null) {
@@ -388,7 +403,8 @@ function sessionHeat(session: OpenClawStatusRecentSession): SessionSummary['stat
 }
 
 function toSessions(status: OpenClawStatusResponse): SessionSummary[] {
-  return (status.sessions?.recent || []).map((session) => ({
+  const recent = Array.isArray(status.sessions?.recent) ? status.sessions.recent : [];
+  return recent.map((session) => ({
     key: session.key,
     kind: session.kind || 'direct',
     age: relFromAgeMs(session.age),
@@ -410,7 +426,8 @@ function toSessions(status: OpenClawStatusResponse): SessionSummary[] {
 }
 
 function toSecurityIssues(status: OpenClawStatusResponse): SecurityIssue[] {
-  return (status.securityAudit?.issues || []).map((issue) => ({
+  const issues = Array.isArray(status.securityAudit?.issues) ? status.securityAudit.issues : [];
+  return issues.map((issue) => ({
     severity: issue.severity || 'info',
     title: issue.title || 'Untitled issue',
     detail: issue.detail || '',
@@ -419,7 +436,8 @@ function toSecurityIssues(status: OpenClawStatusResponse): SecurityIssue[] {
 }
 
 function toPresence(items: OpenClawPresenceResponseItem[]): PresenceItem[] {
-  return items.map((item) => ({
+  const list = Array.isArray(items) ? items : [];
+  return list.map((item) => ({
     text: item.text || 'Presence event',
     host: item.host,
     mode: item.mode,
@@ -664,13 +682,13 @@ function buildMeetings(
 
 export async function getDashboardData(): Promise<DashboardData> {
   const [health, logs, status, presence] = await Promise.all([
-    fetchJson<OpenClawHealthResponse>('/api/openclaw/health'),
-    fetchJson<OpenClawLogEntry[]>('/api/openclaw/logs?limit=40'),
-    fetchJson<OpenClawStatusResponse>('/api/openclaw/status'),
-    fetchJson<OpenClawPresenceResponseItem[]>('/api/openclaw/system-presence'),
+    fetchJsonOr<OpenClawHealthResponse>('/api/openclaw/health', { agents: [] }),
+    fetchJsonOr<OpenClawLogEntry[]>('/api/openclaw/logs?limit=40', []),
+    fetchJsonOr<OpenClawStatusResponse>('/api/openclaw/status', {}),
+    fetchJsonOr<OpenClawPresenceResponseItem[]>('/api/openclaw/system-presence', []),
   ]);
 
-  const agents = (health.agents || []).map(deriveAgent);
+  const agents = (Array.isArray(health.agents) ? health.agents : []).map(deriveAgent);
   const sessions = toSessions(status);
   const securityIssues = toSecurityIssues(status);
   const presenceItems = toPresence(presence);
@@ -691,7 +709,7 @@ export async function getDashboardData(): Promise<DashboardData> {
       update: status.overview?.update || 'unknown',
       gateway: status.overview?.gateway || 'unknown',
       channels:
-        (status.health?.channels || []).map((channel) => `${channel.name}: ${channel.status}`) || status.channelSummary || [],
+        (Array.isArray(status.health?.channels) ? status.health.channels : []).map((channel) => `${channel.name}: ${channel.status}`) || status.channelSummary || [],
       sessionsText: status.overview?.sessions || 'unknown',
       heartbeat: status.overview?.heartbeat || 'unknown',
       securitySummary: status.securityAudit?.summary || 'No security summary',
