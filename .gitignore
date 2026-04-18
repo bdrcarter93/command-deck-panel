@@ -22,3 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.vercel
+.run/
+.local/
+tmp/
+watchdog/
+.env.vercel.*
+CLAUDE.md
+artifacts/
+._*

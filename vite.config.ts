@@ -34,7 +34,6 @@ export default defineConfig(({ mode }) => ({
           if (id.includes('recharts')) return 'charts';
           if (id.includes('framer-motion')) return 'motion';
           if (id.includes('@radix-ui')) return 'radix';
-          if (id.includes('react') || id.includes('scheduler')) return 'react-vendor';
           return 'vendor';
         },
       },

@@ -6,9 +6,12 @@
   "scripts": {
     "dev": "vite",
     "bridge": "node openclaw-bridge.mjs",
-    "dev:live": "concurrently \"npm run bridge\" \"vite\"",
+    "dev:live": "node dev-supervisor.mjs",
+    "browser": "node scripts/browser-helper.mjs",
+    "preflight": "node scripts/preflight.mjs",
     "build": "vite build",
     "build:dev": "vite build --mode development",
+    "verify": "npm run test && npm run build",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",

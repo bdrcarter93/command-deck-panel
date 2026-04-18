@@ -4,6 +4,7 @@ import StatePanel from '@/components/StatePanel';
 import { useDashboardData } from '@/hooks/useDashboardData';
 
 const sessionStatusStyle: Record<string, string> = {
+  working: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
   hot: 'bg-destructive/20 text-destructive border-destructive/30',
   warm: 'bg-warning/20 text-warning border-warning/30',
   cold: 'bg-primary/20 text-primary border-primary/30',

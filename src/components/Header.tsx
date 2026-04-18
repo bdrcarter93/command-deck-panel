@@ -2,9 +2,11 @@ import { motion } from 'framer-motion';
 import { ShieldAlert, Wifi, RefreshCw, Activity } from 'lucide-react';
 import StatePanel from '@/components/StatePanel';
 import { useDashboardData } from '@/hooks/useDashboardData';
+import { useBridgeStatus } from '@/hooks/useBridgeStatus';
 
 const Header = () => {
   const { data, isLoading, error } = useDashboardData();
+  const { data: bridge, isLoading: bridgeLoading, error: bridgeError } = useBridgeStatus();
 
   if (isLoading) {
     return <StatePanel title="OpenClaw Command Deck" message="Connecting to local runtime bridge…" />;
@@ -14,8 +16,10 @@ const Header = () => {
     return <StatePanel title="OpenClaw Command Deck" message="Live bridge unavailable" detail={error instanceof Error ? error.message : 'Unknown error'} />;
   }
 
-  const activeAgents = data.agents.filter((agent) => agent.status === 'active').length;
   const criticalCount = data.securityIssues.filter((issue) => issue.severity === 'critical').length;
+  const bridgeNode = bridge?.bridge;
+  const upstream = bridge?.upstream;
+  const bridgeHealthy = upstream?.openclawReachable ?? false;
 
   return (
     <motion.div initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }} className="glass-card p-5">
@@ -32,9 +36,29 @@ const Header = () => {
           <div className="px-3 py-2 rounded-lg bg-secondary/30 min-w-[150px]">
             <div className="flex items-center gap-2 text-xs text-muted-foreground uppercase tracking-wider mb-1">
               <Wifi size={12} />
-              Agents Online
+              Bridge
             </div>
-            <p className="text-lg font-semibold text-foreground">{activeAgents}/{data.agents.length}</p>
+            <p className="text-lg font-semibold text-foreground">
+              {bridgeLoading ? 'Checking…' : bridgeError || !bridgeNode ? 'Down' : bridgeHealthy ? 'Healthy' : 'Degraded'}
+            </p>
+            <p className="text-xs text-muted-foreground mt-1">
+              {bridgeError || !bridgeNode
+                ? 'Bridge status unavailable'
+                : bridgeHealthy
+                  ? `Up ${Math.floor((bridgeNode.uptimeMs ?? 0) / 1000)}s · OpenClaw reachable`
+                  : upstream?.lastError || 'Bridge up, upstream unreachable'}
+            </p>
+          </div>
+
+          <div className="px-3 py-2 rounded-lg bg-secondary/30 min-w-[150px]">
+            <div className="flex items-center gap-2 text-xs text-muted-foreground uppercase tracking-wider mb-1">
+              <Wifi size={12} />
+              Agents Working
+            </div>
+            <p className="text-lg font-semibold text-foreground">{data.summary.workingAgents}/{data.summary.activeAgents}</p>
+            <p className="text-xs text-muted-foreground mt-1">
+              {data.summary.sessionCount} sessions · unknown agents excluded from active count
+            </p>
           </div>
 
           <div className="px-3 py-2 rounded-lg bg-secondary/30 min-w-[150px]">
@@ -48,17 +72,24 @@ const Header = () => {
           <div className="px-3 py-2 rounded-lg bg-secondary/30 min-w-[150px]">
             <div className="flex items-center gap-2 text-xs text-muted-foreground uppercase tracking-wider mb-1">
               <RefreshCw size={12} />
-              Update
+              Channels
             </div>
-            <p className="text-sm font-semibold text-foreground line-clamp-2">{data.summary.update}</p>
+            <p className="text-sm font-semibold text-foreground line-clamp-2">
+              {data.summary.runningChannels}/{data.summary.configuredChannels} running
+            </p>
           </div>
 
           <div className="px-3 py-2 rounded-lg bg-secondary/30 min-w-[150px]">
             <div className="flex items-center gap-2 text-xs text-muted-foreground uppercase tracking-wider mb-1">
               <Activity size={12} />
-              Heartbeat
+              Readiness
             </div>
-            <p className="text-sm font-semibold text-foreground line-clamp-2">{data.summary.heartbeat}</p>
+            <p className="text-sm font-semibold text-foreground line-clamp-2">
+              {data.summary.readyAgents} ready · {data.summary.limitedAgents} limited
+            </p>
+            <p className="text-xs text-muted-foreground mt-1">
+              {data.summary.blockedAgents} blocked · {data.summary.unknownAgents} unknown
+            </p>
           </div>
         </div>
       </div>

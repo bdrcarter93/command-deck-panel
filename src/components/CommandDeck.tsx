@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ShieldAlert, Radio, AlertTriangle, Cpu } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import StatePanel from '@/components/StatePanel';
 import { useDashboardData } from '@/hooks/useDashboardData';
@@ -31,10 +32,19 @@ const CountUp = ({ target, suffix = '' }: { target: number; suffix?: string }) =
 };
 
 const statusColor: Record<string, string> = {
+  working: 'bg-primary',
   active: 'bg-primary',
   idle: 'bg-warning',
-  error: 'bg-destructive',
+  blocked: 'bg-destructive',
   offline: 'bg-muted-foreground',
+  unknown: 'bg-muted-foreground',
+};
+
+const readinessStyle: Record<string, string> = {
+  ready: 'bg-primary/15 text-primary border-primary/30',
+  limited: 'bg-warning/15 text-warning border-warning/30',
+  blocked: 'bg-destructive/15 text-destructive border-destructive/30',
+  unknown: 'bg-secondary/60 text-muted-foreground border-border',
 };
 
 const CommandDeck = () => {
@@ -62,8 +72,62 @@ const CommandDeck = () => {
     return <StatePanel title="Command Deck" message="Live bridge unavailable" detail={error instanceof Error ? error.message : 'Unable to load dashboard data.'} />;
   }
 
+  const remoteStatusMessage = data.meta.remoteDegraded
+    ? 'Remote bridge/API is degraded; showing best-effort cached/fallback dashboard data.'
+    : 'Live bridge telemetry is flowing normally.';
+
+  const remoteStatusDetail = data.meta.remoteDegraded
+    ? 'This prevents remote blank screens when the bridge or tunnel is unavailable.'
+    : data.summary.gateway;
+
   return (
     <div className="space-y-6">
+      <StatePanel
+        title="Remote Mode"
+        message={remoteStatusMessage}
+        detail={remoteStatusDetail}
+      />
+
+      <div className="glass-card p-5 space-y-4">
+        <div>
+          <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-1">Chapter 9 · Mission Control</p>
+          <h2 className="text-lg font-semibold text-foreground">Build Your Own Mission Control</h2>
+          <p className="text-sm text-muted-foreground mt-1">
+            This chapter now makes the dashboard deliverables explicit: what is live now, what is scaffolded, and what proof confirms the system is working.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div className="rounded-lg border border-border/40 bg-secondary/20 p-4">
+            <p className="text-sm font-medium text-foreground mb-2">Live modules now</p>
+            <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
+              <li>remote mode + bridge health</li>
+              <li>recent sessions + presence + warning counters</li>
+              <li>recent activity feed</li>
+              <li>agent readiness / truth summaries</li>
+            </ul>
+          </div>
+          <div className="rounded-lg border border-border/40 bg-secondary/20 p-4">
+            <p className="text-sm font-medium text-foreground mb-2">Scaffolded workflow surfaces</p>
+            <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
+              <li>task board for execution tracking</li>
+              <li>builder pipeline tracker</li>
+              <li>ops loop for business movement</li>
+              <li>supporting live data adapters for later wiring</li>
+            </ul>
+          </div>
+          <div className="rounded-lg border border-primary/30 bg-primary/5 p-4">
+            <p className="text-sm font-medium text-foreground mb-2">Proof required</p>
+            <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-4">
+              <li>dashboard loads without blank state</li>
+              <li>bridge status renders live or fallback detail</li>
+              <li>activity + agent panels show observable data</li>
+              <li>operator can identify what is live vs scaffolded</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {metrics.map((m, i) => (
           <motion.div
@@ -153,16 +217,20 @@ const CommandDeck = () => {
                 <div className="flex items-center gap-3">
                   <span className="text-lg">{agent.emoji}</span>
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 flex-wrap">
                       <p className="text-sm font-medium text-foreground">{agent.name}</p>
                       <span className="relative flex h-2 w-2">
-                        {agent.status === 'active' && (
+                        {(agent.status === 'active' || agent.status === 'working') && (
                           <span className={`animate-pulse-dot absolute inline-flex h-full w-full rounded-full ${statusColor[agent.status]} opacity-75`} />
                         )}
                         <span className={`relative inline-flex rounded-full h-2 w-2 ${statusColor[agent.status]}`} />
                       </span>
+                      <Badge variant="outline" className={readinessStyle[agent.readiness]}>{agent.readinessLabel}</Badge>
+                      {agent.evaluationOrder === 0 && <Badge variant="outline" className="border-primary/20 text-primary/80">evaluated first</Badge>}
                     </div>
-                    <p className="text-xs text-muted-foreground truncate">{agent.currentActivity}</p>
+                    <p className="text-xs text-muted-foreground">{agent.currentActivity}</p>
+                    <p className="text-[11px] text-foreground/80 mt-1 line-clamp-2">{agent.operatorSummary}</p>
+                    <p className="text-[11px] text-muted-foreground mt-1 line-clamp-2">Evidence: {agent.truthSummary}</p>
                   </div>
                   <span className="text-xs text-muted-foreground whitespace-nowrap">{agent.lastSeen}</span>
                 </div>

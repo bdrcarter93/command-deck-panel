@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 import StatePanel from '@/components/StatePanel';
 import { useDashboardData } from '@/hooks/useDashboardData';
+import { useBridgeStatus } from '@/hooks/useBridgeStatus';
 
 const severityStyle: Record<string, string> = {
   critical: 'bg-destructive/20 text-destructive border-destructive/30',
@@ -11,6 +12,10 @@ const severityStyle: Record<string, string> = {
 
 const SystemStatus = () => {
   const { data, isLoading, error } = useDashboardData();
+  const { data: bridge } = useBridgeStatus();
+  const bridgeNode = bridge?.bridge;
+  const upstream = bridge?.upstream;
+  const openclawReachable = upstream?.openclawReachable ?? false;
 
   if (isLoading) {
     return <StatePanel title="System Status" message="Loading security and presence data…" detail="Using explicit security audit and system-presence surfaces from OpenClaw." />;
@@ -22,6 +27,44 @@ const SystemStatus = () => {
 
   return (
     <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+      <div className="glass-card p-5 xl:col-span-2">
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-1">Bridge Health</p>
+            <h3 className="text-lg font-semibold text-foreground">Local dashboard bridge</h3>
+          </div>
+          <Badge variant="outline" className="border-primary/20 text-primary/80">
+            {openclawReachable ? 'healthy' : 'degraded'}
+          </Badge>
+        </div>
+
+        {!bridgeNode ? (
+          <StatePanel title="Bridge status unavailable" message="The UI could not fetch bridge telemetry" detail="The dashboard can still render partial cached/live data when available." />
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 text-sm">
+            <div className="rounded-lg bg-secondary/20 p-4">
+              <p className="text-muted-foreground text-xs uppercase tracking-wider mb-1">Bridge</p>
+              <p className="text-foreground font-medium">{bridgeNode.host}:{bridgeNode.port}</p>
+            </div>
+            <div className="rounded-lg bg-secondary/20 p-4">
+              <p className="text-muted-foreground text-xs uppercase tracking-wider mb-1">Uptime</p>
+              <p className="text-foreground font-medium">{Math.floor((bridgeNode.uptimeMs ?? 0) / 1000)}s</p>
+            </div>
+            <div className="rounded-lg bg-secondary/20 p-4">
+              <p className="text-muted-foreground text-xs uppercase tracking-wider mb-1">OpenClaw Reachable</p>
+              <p className="text-foreground font-medium">{openclawReachable ? 'yes' : 'no'}</p>
+            </div>
+            <div className="rounded-lg bg-secondary/20 p-4">
+              <p className="text-muted-foreground text-xs uppercase tracking-wider mb-1">Failures</p>
+              <p className="text-foreground font-medium">{bridgeNode.consecutiveFailures ?? 0}</p>
+            </div>
+          </div>
+        )}
+
+        {bridgeNode?.lastError && <p className="text-xs text-muted-foreground mt-3">Last bridge error: {bridgeNode.lastError}</p>}
+        {upstream?.lastError && <p className="text-xs text-muted-foreground mt-1">Last upstream error: {upstream.lastError}</p>}
+      </div>
+
       <div className="glass-card p-5">
         <div className="flex items-center justify-between mb-4">
           <div>
