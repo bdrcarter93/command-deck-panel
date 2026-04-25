@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -51,7 +51,7 @@
     --sidebar-border: 0 0% 100% / 0.06;
     --sidebar-ring: 160 84% 39%;
 
-    --font-heading: 'Space Grotesk', sans-serif;
+    --font-heading: 'Inter', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
   }
 }
@@ -63,7 +63,7 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Inter', sans-serif;
   }
 }
 
@@ -100,6 +100,106 @@
 
   .font-mono {
     font-family: 'JetBrains Mono', monospace;
+  }
+
+  .mission-shell {
+    position: relative;
+    overflow: hidden;
+    background:
+      url("data:image/svg+xml,%3Csvg width='4400' height='2800' viewBox='0 0 4400 2800' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='%23f09a62' stroke-linecap='round' stroke-linejoin='round' fill='none'%3E%3Cg opacity='0.62' stroke-width='1.34'%3E%3Cpath d='M-420 1180C-170 1034 96 946 392 914C667 885 939 915 1212 891C1465 870 1704 788 1960 768C2234 747 2500 793 2764 848C3036 904 3308 949 3581 924C3846 900 4102 820 4370 806C4590 794 4806 824 5026 894'/%3E%3Cpath d='M-374 1312C-111 1159 169 1068 480 1038C769 1010 1056 1043 1342 1019C1609 998 1860 913 2128 893C2415 872 2694 920 2972 978C3259 1038 3546 1084 3834 1061C4114 1038 4385 955 4667 943C4897 933 5124 967 5355 1040'/%3E%3Cpath d='M-320 1458C-43 1298 253 1206 580 1179C883 1155 1183 1191 1484 1170C1766 1151 2030 1066 2313 1048C2617 1029 2912 1080 3206 1141C3509 1204 3813 1250 4117 1229C4414 1209 4700 1130 4998 1122C5242 1115 5482 1154 5725 1231'/%3E%3Cpath d='M-258 1622C34 1458 347 1372 690 1352C1009 1334 1325 1374 1642 1356C1938 1340 2218 1261 2516 1247C2835 1232 3146 1287 3457 1351C3777 1416 4098 1461 4418 1443C4731 1425 5033 1354 5347 1352C5605 1350 5858 1396 6114 1478'/%3E%3Cpath d='M-182 1808C124 1643 453 1569 812 1561C1145 1553 1474 1598 1806 1584C2117 1570 2411 1501 2723 1492C3057 1482 3383 1540 3708 1608C4043 1677 4378 1722 4713 1707C5041 1692 5357 1631 5687 1636C5958 1640 6222 1695 6489 1784'/%3E%3C/g%3E%3Cg opacity='0.58' stroke-width='1.12'%3E%3Cpath d='M640 774C777 679 927 625 1086 619C1228 614 1368 644 1508 635C1641 626 1768 580 1902 573C2052 566 2200 596 2346 628C2498 660 2651 677 2804 667C2953 657 3095 609 3245 603C3397 597 3547 628 3697 661C3820 688 3940 700 4066 692'/%3E%3Cpath d='M738 880C891 772 1060 711 1239 706C1398 701 1555 735 1711 726C1861 717 2004 666 2155 660C2324 653 2488 688 2652 724C2821 761 2991 780 3160 771C3326 762 3484 709 3650 704C3819 699 3984 735 4149 772C4283 802 4415 816 4553 809'/%3E%3Cpath d='M850 1002C1022 881 1211 814 1410 810C1587 806 1762 844 1936 836C2103 828 2263 772 2431 766C2619 760 2802 799 2984 840C3173 882 3362 903 3550 895C3735 887 3913 829 4098 825C4286 821 4470 862 4654 905C4804 940 4950 956 5103 951'/%3E%3Cpath d='M974 1140C1164 1007 1373 936 1593 933C1789 930 1982 972 2174 964C2359 956 2536 895 2722 891C2930 887 3132 930 3334 975C3542 1021 3751 1044 3959 1037C4165 1030 4362 967 4569 965C4778 963 4984 1010 5190 1057C5358 1096 5521 1114 5691 1111'/%3E%3C/g%3E%3Cg opacity='0.56' stroke-width='1.02'%3E%3Cpath d='M944 922C1014 827 1100 768 1202 765C1291 763 1378 790 1465 784C1549 779 1628 741 1712 736C1807 732 1900 757 1993 784C2089 812 2185 831 2282 826C2376 821 2466 780 2561 776C2658 772 2753 798 2848 826C2927 849 3003 858 3086 851'/%3E%3Cpath d='M1028 1018C1107 910 1205 845 1319 842C1420 840 1518 870 1617 864C1712 859 1802 816 1898 812C2005 807 2110 835 2215 866C2323 897 2432 918 2541 913C2647 908 2748 862 2855 859C2964 855 3071 885 3178 916C3267 942 3353 952 3446 944'/%3E%3Cpath d='M1126 1128C1215 1006 1326 935 1454 932C1566 929 1676 963 1786 957C1892 952 1993 904 2100 900C2220 895 2338 927 2455 962C2576 997 2698 1020 2820 1016C2939 1011 3052 960 3172 956C3294 952 3414 986 3534 1022C3634 1052 3731 1063 3835 1055'/%3E%3Cpath d='M2510 896C2578 809 2661 756 2758 753C2844 750 2928 776 3012 771C3092 766 3169 731 3249 727C3340 723 3428 746 3517 771C3607 796 3699 814 3790 809C3880 804 3966 766 4056 763C4148 760 4238 786 4328 812C4402 833 4474 842 4552 835'/%3E%3Cpath d='M2600 998C2679 897 2776 836 2889 833C2988 830 3085 861 3182 855C3276 850 3365 809 3459 805C3565 801 3668 830 3772 862C3878 894 3986 915 4093 910C4198 905 4299 861 4404 858C4512 854 4617 885 4723 919C4809 947 4893 958 4983 950'/%3E%3C/g%3E%3Cg opacity='0.52' stroke-width='0.94'%3E%3Cpath d='M242 1772C346 1682 464 1630 594 1626C709 1623 821 1651 933 1645C1040 1640 1141 1600 1248 1595C1369 1589 1487 1618 1604 1650C1725 1683 1847 1703 1969 1696C2088 1690 2202 1648 2321 1644C2443 1640 2561 1671 2680 1704C2777 1731 2872 1742 2973 1734'/%3E%3Cpath d='M372 1896C491 1793 626 1733 774 1729C905 1725 1033 1758 1161 1752C1283 1747 1399 1701 1521 1696C1660 1691 1796 1724 1931 1760C2070 1797 2210 1819 2349 1814C2486 1808 2616 1760 2753 1756C2893 1752 3029 1788 3166 1827C3278 1859 3386 1872 3502 1865'/%3E%3Cpath d='M528 2036C664 1918 819 1851 989 1848C1140 1846 1288 1884 1435 1878C1576 1872 1710 1820 1851 1816C2011 1811 2167 1849 2324 1890C2484 1932 2646 1957 2806 1952C2964 1947 3115 1892 3274 1889C3435 1886 3593 1928 3752 1971C3882 2006 4008 2022 4142 2015'/%3E%3C/g%3E%3C/svg%3E"),
+      radial-gradient(1200px 620px at 18% 20%, rgba(64, 103, 162, 0.16), transparent 62%),
+      radial-gradient(1400px 760px at 80% 14%, rgba(214, 124, 64, 0.12), transparent 64%),
+      radial-gradient(1100px 700px at 52% 68%, rgba(44, 74, 126, 0.1), transparent 70%),
+      linear-gradient(180deg, #02050d 0%, #040915 42%, #02050b 100%);
+    background-size: 118% 118%, auto, auto, auto, auto;
+    background-position: center center, center center, center center, center center, center center;
+    background-repeat: no-repeat;
+    isolation: isolate;
+  }
+
+  .mission-shell::before {
+    content: '';
+    position: absolute;
+    inset: -6%;
+    background:
+      radial-gradient(900px 520px at 24% 28%, rgba(244, 154, 98, 0.12), transparent 58%),
+      radial-gradient(1200px 680px at 78% 34%, rgba(244, 154, 98, 0.1), transparent 62%),
+      radial-gradient(1100px 720px at 54% 72%, rgba(96, 150, 220, 0.08), transparent 66%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .mission-shell::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(1, 4, 10, 0.08), rgba(1, 4, 10, 0.015) 24%, rgba(1, 4, 10, 0.05) 100%),
+      radial-gradient(1100px 560px at 32% 36%, rgba(216, 126, 70, 0.08), transparent 60%),
+      radial-gradient(1300px 700px at 72% 54%, rgba(90, 144, 214, 0.07), transparent 64%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .mission-shell > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  .mission-panel {
+    background: linear-gradient(180deg, rgba(9, 16, 29, 0.82), rgba(4, 9, 20, 0.86));
+    border: 1px solid rgba(112, 163, 235, 0.22);
+    box-shadow:
+      inset 0 0 0 1px rgba(178, 216, 255, 0.03),
+      0 0 0 1px rgba(62, 110, 180, 0.08),
+      0 0 22px rgba(70, 142, 255, 0.1),
+      0 20px 56px rgba(0, 0, 0, 0.24);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .mission-panel-soft {
+    background: linear-gradient(180deg, rgba(9, 16, 29, 0.68), rgba(4, 9, 20, 0.76));
+    border: 1px solid rgba(112, 163, 235, 0.14);
+    box-shadow:
+      inset 0 0 0 1px rgba(178, 216, 255, 0.02),
+      0 0 14px rgba(70, 142, 255, 0.07),
+      0 16px 44px rgba(0, 0, 0, 0.2);
+  }
+
+  .mission-label {
+    color: rgba(238, 165, 105, 0.9);
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+  }
+
+  .mission-heading {
+    color: #f2a86e;
+    letter-spacing: -0.04em;
+  }
+
+  .mission-subtext {
+    color: rgba(241, 201, 170, 0.7);
+  }
+
+  .mission-stat {
+    color: #f5b47e;
+  }
+
+  .mission-line {
+    background: linear-gradient(90deg, rgba(86, 162, 255, 0), rgba(108, 188, 255, 0.92), rgba(86, 162, 255, 0));
+    box-shadow: 0 0 16px rgba(108, 188, 255, 0.38);
+  }
+
+  .mission-button {
+    background: linear-gradient(180deg, rgba(14, 27, 49, 0.96), rgba(8, 18, 34, 0.98));
+    border: 1px solid rgba(119, 174, 255, 0.28);
+    box-shadow: inset 0 0 0 1px rgba(173, 213, 255, 0.05), 0 0 18px rgba(71, 142, 255, 0.14);
+  }
+
+  .mission-button:hover {
+    border-color: rgba(143, 195, 255, 0.44);
+    box-shadow: inset 0 0 0 1px rgba(173, 213, 255, 0.08), 0 0 24px rgba(71, 142, 255, 0.2);
   }
 
   @keyframes pulse-dot {

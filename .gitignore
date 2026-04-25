@@ -27,6 +27,8 @@ dist-ssr
 .local/
 tmp/
 watchdog/
+tmp-*.png
+Agent HQ.app/
 .env.vercel.*
 CLAUDE.md
 artifacts/

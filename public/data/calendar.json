@@ -1,0 +1,58 @@
+[
+  {
+    "id": "calendar-1",
+    "title": "Operator planning block",
+    "type": "event",
+    "status": "scheduled",
+    "startAt": "2026-04-20T15:00:00.000Z",
+    "endAt": "2026-04-20T15:45:00.000Z",
+    "owner": "Main",
+    "description": "Review active lanes, approvals, and the next sequence of dashboard and agent work.",
+    "location": "Command deck"
+  },
+  {
+    "id": "calendar-2",
+    "title": "Finalize operator routing rules",
+    "type": "task",
+    "status": "scheduled",
+    "startAt": "2026-04-20T16:00:00.000Z",
+    "endAt": "2026-04-20T17:30:00.000Z",
+    "owner": "Main",
+    "description": "Scheduled deep-work block for intake logic, owner paths, and escalation timing.",
+    "linkedTaskId": "task-1"
+  },
+  {
+    "id": "calendar-3",
+    "title": "AI HQ dashboard review",
+    "type": "appointment",
+    "status": "tentative",
+    "startAt": "2026-04-20T19:00:00.000Z",
+    "endAt": "2026-04-20T19:30:00.000Z",
+    "owner": "Builder",
+    "description": "Walk through the latest dashboard shell, calendar tab, and desk view revisions.",
+    "location": "Local review",
+    "linkedTaskId": "task-2"
+  },
+  {
+    "id": "calendar-4",
+    "title": "Bridge degradation audit window",
+    "type": "task",
+    "status": "scheduled",
+    "startAt": "2026-04-21T17:00:00.000Z",
+    "endAt": "2026-04-21T18:00:00.000Z",
+    "owner": "Guardian",
+    "description": "Validate warning copy, fallback behavior, and data-truth messaging before the next operator run.",
+    "linkedTaskId": "task-3"
+  },
+  {
+    "id": "calendar-5",
+    "title": "Finance findings packaging",
+    "type": "event",
+    "status": "scheduled",
+    "startAt": "2026-04-22T18:30:00.000Z",
+    "endAt": "2026-04-22T19:15:00.000Z",
+    "owner": "Deep",
+    "description": "Bundle the highest-value finance ops findings into a reviewable shortlist.",
+    "linkedTaskId": "task-4"
+  }
+]

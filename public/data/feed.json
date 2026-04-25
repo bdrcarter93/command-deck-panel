@@ -1,0 +1,23 @@
+[
+  {
+    "id": "feed-1",
+    "agent": "Builder",
+    "message": "Dashboard layout pass underway, wiring board view and desk view together.",
+    "priority": "high",
+    "timestamp": "2026-04-19T18:36:00.000Z"
+  },
+  {
+    "id": "feed-2",
+    "agent": "Main",
+    "message": "Queue pressure rising around review handoffs, keep final approvals visible.",
+    "priority": "medium",
+    "timestamp": "2026-04-19T18:28:00.000Z"
+  },
+  {
+    "id": "feed-3",
+    "agent": "Ops",
+    "message": "Bridge warning remains active, showing best-effort data instead of blank screens.",
+    "priority": "low",
+    "timestamp": "2026-04-19T18:22:00.000Z"
+  }
+]

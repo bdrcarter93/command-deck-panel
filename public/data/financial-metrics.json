@@ -1,0 +1,34 @@
+[
+  {
+    "id": "finance-1",
+    "label": "Cash-ready completions",
+    "value": "$22.6k",
+    "detail": "Carlos Acosta is invoiced, at 100% A/R detail, and sitting in ready-for-cap-out with closeout work still visible.",
+    "tone": "good",
+    "trend": "up"
+  },
+  {
+    "id": "finance-2",
+    "label": "Appraisal exposure",
+    "value": "$8.0k",
+    "detail": "Elizabeth Seidell is still in appraisal with balance due on-screen and production preparation not fully cleared.",
+    "tone": "watch",
+    "trend": "flat"
+  },
+  {
+    "id": "finance-3",
+    "label": "Inspection quote bench",
+    "value": "$2.7k",
+    "detail": "Ken Humphreys already has a small retail prescription estimate built from an inspection lane.",
+    "tone": "neutral",
+    "trend": "up"
+  },
+  {
+    "id": "finance-4",
+    "label": "Cancelled lead drag",
+    "value": "1 lead",
+    "detail": "Vivian Harris is cancelled with no visible recovery task, which makes follow-up leakage hard to see.",
+    "tone": "risk",
+    "trend": "down"
+  }
+]

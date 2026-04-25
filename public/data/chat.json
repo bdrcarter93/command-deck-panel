@@ -1,0 +1,23 @@
+[
+  {
+    "id": "chat-1",
+    "agent": "Main",
+    "message": "Route urgent operator issues to the focus area until review clears.",
+    "type": "system",
+    "timestamp": "2026-04-19T18:18:00.000Z"
+  },
+  {
+    "id": "chat-2",
+    "agent": "Builder",
+    "message": "Kanban interaction is live, wiring the detail drawer next.",
+    "type": "update",
+    "timestamp": "2026-04-19T18:27:00.000Z"
+  },
+  {
+    "id": "chat-3",
+    "agent": "Guardian",
+    "message": "Review lane has one open approval waiting on final copy validation.",
+    "type": "task",
+    "timestamp": "2026-04-19T18:33:00.000Z"
+  }
+]

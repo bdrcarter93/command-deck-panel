@@ -1,0 +1,37 @@
+[
+  {
+    "id": "radar-1",
+    "label": "Cash release",
+    "value": "$22.6k",
+    "detail": "Carlos Acosta is the cleanest visible near-term cash unlock.",
+    "tone": "good"
+  },
+  {
+    "id": "radar-2",
+    "label": "Appraisal drift",
+    "value": "1 active lane",
+    "detail": "Seidell is the clearest insurance lane that can quietly age if communication slips.",
+    "tone": "watch"
+  },
+  {
+    "id": "radar-3",
+    "label": "Inspection fallout",
+    "value": "1 cancelled",
+    "detail": "Vivian Harris shows cancellation without a visible recovery task or structured salvage path.",
+    "tone": "risk"
+  },
+  {
+    "id": "radar-4",
+    "label": "Quote conversion pressure",
+    "value": "1 waiting",
+    "detail": "Ken Humphreys has an estimate and appointment history but has not crossed into a stronger production path.",
+    "tone": "watch"
+  },
+  {
+    "id": "radar-5",
+    "label": "Task hygiene",
+    "value": "light cover",
+    "detail": "Two of the sampled live jobs showed little to no open task protection, which increases memory-dependent execution.",
+    "tone": "watch"
+  }
+]

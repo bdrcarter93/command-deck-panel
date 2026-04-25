@@ -1,0 +1,47 @@
+[
+  {
+    "id": "brain-1",
+    "type": "decision",
+    "title": "Insurance contracts stay deductible-led",
+    "summary": "The signed insurance contract structure keeps the promise anchored to carrier-authorized scope and homeowner deductible only.",
+    "owner": "Main",
+    "source": "Seidell insurance contract audit",
+    "freshness": "fresh"
+  },
+  {
+    "id": "brain-2",
+    "type": "memory",
+    "title": "Appraisal demand already exists for Seidell",
+    "summary": "The appraisal demand packet is signed, so the current gap is not paperwork creation. It is workflow advancement and communication timing.",
+    "owner": "Deep",
+    "source": "Supplement/Appraisal documents",
+    "freshness": "fresh"
+  },
+  {
+    "id": "brain-3",
+    "type": "playbook",
+    "title": "Inspection lanes need a hard next-task within 24 hours",
+    "summary": "Appointment-scheduled jobs with no visible task cover become easy to lose, even when an estimate already exists.",
+    "owner": "Ops",
+    "source": "Ken Humphreys + Vivian Harris audit",
+    "freshness": "aging"
+  },
+  {
+    "id": "brain-4",
+    "type": "question",
+    "title": "What is the BD salvage sequence after cancellation?",
+    "summary": "Vivian Harris exposes a weak spot. The system needs a deterministic reclaim, nurture, or archive pattern for dead inspection leads.",
+    "owner": "Main",
+    "source": "Cancelled job audit",
+    "freshness": "aging"
+  },
+  {
+    "id": "brain-5",
+    "type": "memory",
+    "title": "Retail production can outrun worksheet clarity",
+    "summary": "Carlos Acosta is operationally far along even though worksheet structure still looks thin, which hints at handoff information living elsewhere.",
+    "owner": "Guardian",
+    "source": "Carlos Acosta live job snapshot",
+    "freshness": "stale"
+  }
+]

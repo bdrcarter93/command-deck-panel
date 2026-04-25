@@ -14,6 +14,8 @@
     "verify": "npm run test && npm run build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "serve:hq": "./start-hq.sh",
+    "build:app": "./scripts/build-agent-hq-app.sh",
     "test": "vitest run",
     "test:watch": "vitest"
   },

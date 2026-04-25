@@ -1,0 +1,32 @@
+[
+  {
+    "id": "collection-1",
+    "customer": "Carlos Acosta",
+    "stage": "Ready for cap out",
+    "amount": 22570.22,
+    "owner": "Kali Najah",
+    "dueAt": "2026-04-18T17:00:00.000Z",
+    "status": "on-track",
+    "notes": "Warranty info is the last visible closeout move before this lane should feel complete."
+  },
+  {
+    "id": "collection-2",
+    "customer": "Elizabeth Seidell",
+    "stage": "Appraisal",
+    "amount": 7973.91,
+    "owner": "Matthew Griffin",
+    "dueAt": "2026-04-22T19:00:00.000Z",
+    "status": "watch",
+    "notes": "Appraisal demand is signed, but the lane still depends on approval call and production readiness."
+  },
+  {
+    "id": "collection-3",
+    "customer": "Ken Humphreys",
+    "stage": "Estimate follow-up",
+    "amount": 2700,
+    "owner": "Kali Najah",
+    "dueAt": "2026-04-24T18:00:00.000Z",
+    "status": "watch",
+    "notes": "Small retail quote exists, but the job is still parked in appointment-scheduled territory."
+  }
+]

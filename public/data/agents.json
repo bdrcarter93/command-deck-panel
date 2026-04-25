@@ -1,0 +1,42 @@
+[
+  {
+    "id": "main",
+    "name": "Main",
+    "role": "Chief of Staff",
+    "status": "working",
+    "color": "#10b981",
+    "currentTask": "Direct priority routing and operator escalation"
+  },
+  {
+    "id": "builder",
+    "name": "Builder",
+    "role": "Implementation Engineer",
+    "status": "working",
+    "color": "#38bdf8",
+    "currentTask": "Ship the new HQ dashboard experience"
+  },
+  {
+    "id": "ops",
+    "name": "Ops",
+    "role": "Operations Lead",
+    "status": "idle",
+    "color": "#a78bfa",
+    "currentTask": "Monitor queue health and live follow-up"
+  },
+  {
+    "id": "deep",
+    "name": "Deep",
+    "role": "Research Analyst",
+    "status": "review",
+    "color": "#f59e0b",
+    "currentTask": "Package ranked findings for review"
+  },
+  {
+    "id": "guardian",
+    "name": "Guardian",
+    "role": "QA and Review",
+    "status": "idle",
+    "color": "#fb7185",
+    "currentTask": "Hold final review and escalation cover"
+  }
+]

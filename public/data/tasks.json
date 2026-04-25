@@ -1,0 +1,53 @@
+[
+  {
+    "id": "task-1",
+    "title": "Finalize operator routing rules",
+    "description": "Lock the latest intake logic, owner paths, and escalation triggers before the next live test.",
+    "status": "assigned",
+    "assignee": "Main",
+    "priority": "high",
+    "timestamps": {
+      "createdAt": "2026-04-19T18:10:00.000Z",
+      "updatedAt": "2026-04-19T18:20:00.000Z"
+    }
+  },
+  {
+    "id": "task-2",
+    "title": "Build AI HQ dashboard shell",
+    "description": "Ship the three-column dashboard, desk view, sliding chat, and local JSON refresh loop.",
+    "status": "in-progress",
+    "assignee": "Builder",
+    "priority": "high",
+    "timestamps": {
+      "createdAt": "2026-04-19T18:05:00.000Z",
+      "updatedAt": "2026-04-19T18:35:00.000Z",
+      "startedAt": "2026-04-19T18:08:00.000Z"
+    }
+  },
+  {
+    "id": "task-3",
+    "title": "Audit live bridge degradation notes",
+    "description": "Confirm warning copy and fallback behavior stay honest while dashboards remain readable.",
+    "status": "review",
+    "assignee": "Guardian",
+    "priority": "medium",
+    "timestamps": {
+      "createdAt": "2026-04-19T17:55:00.000Z",
+      "updatedAt": "2026-04-19T18:32:00.000Z",
+      "startedAt": "2026-04-19T18:00:00.000Z"
+    }
+  },
+  {
+    "id": "task-4",
+    "title": "Package first-pass finance findings",
+    "description": "Prepare a ranked shortlist of finance ops findings once the bridge data is stable enough to trust.",
+    "status": "done",
+    "assignee": "Deep",
+    "priority": "low",
+    "timestamps": {
+      "createdAt": "2026-04-19T17:15:00.000Z",
+      "updatedAt": "2026-04-19T17:50:00.000Z",
+      "completedAt": "2026-04-19T17:50:00.000Z"
+    }
+  }
+]

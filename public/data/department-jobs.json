@@ -1,0 +1,50 @@
+[
+  {
+    "id": "job-1",
+    "business": "RD",
+    "customer": "Carlos Acosta",
+    "market": "Tempe",
+    "workType": "Retail",
+    "stage": "Ready for cap out",
+    "owner": "Kali Najah",
+    "value": 22570.22,
+    "nextAction": "Deliver warranty info and finish closeout sequence.",
+    "risk": "low"
+  },
+  {
+    "id": "job-2",
+    "business": "RD",
+    "customer": "Elizabeth Seidell",
+    "market": "Queen Creek",
+    "workType": "Insurance / Appraisal",
+    "stage": "Appraisal",
+    "owner": "Matthew Griffin",
+    "value": 7973.91,
+    "nextAction": "Run approval call and prep for production once appraisal clears.",
+    "risk": "high"
+  },
+  {
+    "id": "job-3",
+    "business": "BD",
+    "customer": "Ken Humphreys",
+    "market": "Florence",
+    "workType": "Inspection",
+    "stage": "Appointment Scheduled",
+    "owner": "Kali Najah",
+    "value": 2700,
+    "nextAction": "Complete inspection and convert the existing roof prescription into a firm next step.",
+    "risk": "medium"
+  },
+  {
+    "id": "job-4",
+    "business": "BD",
+    "customer": "Vivian Harris",
+    "market": "Goodyear",
+    "workType": "Inspection",
+    "stage": "Cancelled",
+    "owner": "Matthew Griffin",
+    "value": 0,
+    "nextAction": "Decide whether to salvage, nurture later, or archive with a clean reason code.",
+    "risk": "medium"
+  }
+]
